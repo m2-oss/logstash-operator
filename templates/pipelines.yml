@@ -1,0 +1,4 @@
+{{- range $pipeline := .Pipelines }}
+- pipeline.id: {{ $pipeline }}
+  path.config: "/usr/share/logstash/pipeline/{{ $pipeline }}.conf"
+{{- end -}}

@@ -1,0 +1,31 @@
+apiVersion: logger.m2.ru/v1
+kind: M2Logstash
+metadata:
+  name: m2logstash-sample
+spec:
+  # Add fields here
+  elasticsearch:
+    hosts: "rc1a-u3o158uvjts8p9bc.mdb.yandexcloud.net:9200"
+    ssl: true
+    ssl_certificate_verification: false
+    cacert: "/usr/share/logstash/certs/CA.pem"
+    secret: logstash-credentials
+    kafka:
+      hosts: "rc1a-2fqvb5a0sq94pr0a.mdb.yandexcloud.net:9092,rc1b-icrl6tm9mjlif6vg.mdb.yandexcloud.net:9092,rc1c-eh8s0c74n49cnjv2.mdb.yandexcloud.net:9092"
+      decorate_events: true
+      auto_offset_reset: "earliest"
+      consumer_threads: 8
+      security_protocol: "SASL_PLAINTEXT"
+      sasl_mechanisms: "SCRAM-SHA-512"
+      secret: logstash-credentials
+    app:
+      image: "cr.yandex/crp29rd1alarj2e8jmp5/vtblife/devops/docker-image/logstash"
+      tag: "7.14.2"
+      name: logstash
+      resources:
+        limits:
+          cpu: "2000m"
+          memory: "1536Mi"
+        requests:
+          cpu: "100m"
+          memory: "1536Mi"

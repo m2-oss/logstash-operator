@@ -1,0 +1,24 @@
+# permissions for end users to edit m2logstashes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: m2logstash-editor-role
+rules:
+- apiGroups:
+  - logger.m2.ru
+  resources:
+  - m2logstashes
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - logger.m2.ru
+  resources:
+  - m2logstashes/status
+  verbs:
+  - get

@@ -1,0 +1,32 @@
+---
+apiVersion: logger.m2.ru/v1
+kind: M2LogstashPipeline
+metadata:
+  name: logstash-instance
+spec:
+  input:
+    kafka:
+      hosts:
+        - "kafka-1:9092"
+        - "kafka-2:9092"
+        - "kafka-3:9092"
+      decorate_events: "basic"
+      auto_offset_reset: "earliest"
+      consumer_threads: 8
+      security_protocol: "SASL_PLAINTEXT"
+      sasl_mechanism: "SCRAM-SHA-512"
+      secret: logstash-operator-credentials
+  filter: |
+    json {
+      source => "message"
+    }
+  output:
+    elasticsearch:
+      hosts:
+        - "elasticsearch-1:9200"
+        - "elasticsearch-2:9200"
+        - "elasticsearch-3:9200"
+      ssl: true
+      ssl_certificate_verification: false
+      cacert: "/usr/share/logstash/certs/CA.pem"
+      secret: logstash-operator-credentials

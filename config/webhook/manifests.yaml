@@ -1,0 +1,100 @@
+
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-logger-m2-ru-v1-m2logstashpipeline
+  failurePolicy: Fail
+  name: mm2logstashpipeline.kb.io
+  rules:
+  - apiGroups:
+    - logger.m2.ru
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - m2logstashpipelines
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-logger-m2-ru-v1-m2logstash
+  failurePolicy: Fail
+  name: mm2logstash.kb.io
+  rules:
+  - apiGroups:
+    - logger.m2.ru
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - m2logstashes
+  sideEffects: None
+
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /validate-logger-m2-ru-v1-m2logstashpipeline
+  failurePolicy: Fail
+  name: vm2logstashpipeline.kb.io
+  rules:
+  - apiGroups:
+    - logger.m2.ru
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - m2logstashpipelines
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  - v1beta1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /validate-logger-m2-ru-v1-m2logstash
+  failurePolicy: Fail
+  name: vm2logstash.kb.io
+  rules:
+  - apiGroups:
+    - logger.m2.ru
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - m2logstashes
+  sideEffects: None

@@ -1,0 +1,4 @@
+http.host: "0.0.0.0"
+pipeline.ordered: auto
+dead_letter_queue.enable: {{ .DLQ }}
+dead_letter_queue.max_bytes: 1024mb

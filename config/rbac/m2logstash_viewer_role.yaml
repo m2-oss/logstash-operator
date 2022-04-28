@@ -1,0 +1,20 @@
+# permissions for end users to view m2logstashes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: m2logstash-viewer-role
+rules:
+- apiGroups:
+  - logger.m2.ru
+  resources:
+  - m2logstashes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - logger.m2.ru
+  resources:
+  - m2logstashes/status
+  verbs:
+  - get

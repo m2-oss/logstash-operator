@@ -1,0 +1,17 @@
+---
+apiVersion: logger.m2.ru/v1
+kind: M2Logstash
+metadata:
+  name: logstash-instance
+spec:
+  image: "logstash"
+  tag: "7.16.2"
+  java_opts: "-Xms128m -Xmx1g"
+  name: logstash
+  resources:
+    limits:
+      cpu: "2000m"
+      memory: "1536Mi"
+    requests:
+      cpu: "100m"
+      memory: "1536Mi"

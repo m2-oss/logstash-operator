@@ -1,0 +1,35 @@
+domain: m2.ru
+layout: go.kubebuilder.io/v3
+projectName: Logstash
+repo: github.com/m2-oss/logstash-operator
+plugins:
+  manifests.sdk.operatorframework.io/v2: {}
+  scorecard.sdk.operatorframework.io/v2: {}
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  group: logger
+  controller: true
+  domain: m2.ru
+  kind: M2Logstash
+  version: v1
+  path: github.com/m2-oss/logstash-operator
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+- pipeline:
+    crdVersion: v1
+    namespaced: true
+  group: logger
+  controller: true
+  domain: m2.ru
+  kind: M2LogstashPipeline
+  version: v1
+  path: github.com/m2-oss/logstash-operator
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
+version: '3'
