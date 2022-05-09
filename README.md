@@ -36,12 +36,15 @@ See more [details](docs) and [examples](docs/examples).
 Есть два варианта установки:
 - При помощи kustomize
 ```
-kustomize edit set image controller=m2/logstash-operator:latest
+kustomize edit set image controller=javdet/logstash-operator:v1.0.0
 kustomize build config/default | kubectl apply -f -
 ```
 - Как Helm chart
 ```
-helm upgrade --install logstash-operator ./chart
+kubectl apply -f https://raw.githubusercontent.com/m2-oss/helm-charts/master/charts/logstash-operator/crds/logger.m2.ru_m2logstashes.yaml
+kubectl apply -f https://raw.githubusercontent.com/m2-oss/helm-charts/master/charts/logstash-operator/crds/logger.m2.ru_m2logstashpipelines.yaml
+helm repo add m2 https://m2-oss.github.io/helm-charts
+helm install logstash-operator m2/logstash-operator
 ```
 ___
 ## Installation
@@ -53,12 +56,15 @@ Requirements
 There are two installation options
 - Using kustomize
 ```
-kustomize edit set image controller=m2/logstash-operator:latest
+kustomize edit set image controller=javdet/logstash-operator:v1.0.0
 kustomize build config/default | kubectl apply -f -
 ```
 - Using Helm chart
 ```
-helm upgrade --install logstash-operator ./chart
+kubectl apply -f https://raw.githubusercontent.com/m2-oss/helm-charts/master/charts/logstash-operator/crds/logger.m2.ru_m2logstashes.yaml
+kubectl apply -f https://raw.githubusercontent.com/m2-oss/helm-charts/master/charts/logstash-operator/crds/logger.m2.ru_m2logstashpipelines.yaml
+helm repo add m2 https://m2-oss.github.io/helm-charts
+helm install logstash-operator m2/logstash-operator
 ```
 
 ## Сборка из исходников

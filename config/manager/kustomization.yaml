@@ -12,5 +12,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 images:
 - name: controller
-  newName: cr.yandex/crp29rd1alarj2e8jmp5/vtblife/cloudinfra/kubernetes/operators/logstash-operator
-  newTag: public-v0.51
+  newName: javdet/logstash-operator
+  newTag: v1.0.0
